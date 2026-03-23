@@ -39,3 +39,6 @@ out/
 ### Other ###
 ERD.vsdx
 ~$$ERD.~vsdx
+~.mv.db
+~.trace.db
+
