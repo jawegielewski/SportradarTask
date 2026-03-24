@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "tbl_team")
 public class Team implements Serializable {
@@ -18,7 +19,7 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
-    private long teamId;
+    private Long teamId;
 
     @Column(name = "name")
     private String name;
@@ -42,15 +43,15 @@ public class Team implements Serializable {
     private String coach;
 
     @Column(name = "year_of_foundation")
-    private short yearOfFoundation;
+    private Short yearOfFoundation;
 
     @OneToMany(mappedBy = "homeTeam")
-    private Set<Match> homeMatches;
+    private List<Match> homeMatches;
 
     @OneToMany(mappedBy = "awayTeam")
-    private Set<Match> awayMatches;
+    private List<Match> awayMatches;
 
     @OneToMany
     @JoinColumn(name = "team_id_foreignkey")
-    private Set<TeamPlayers> teamPlayers;
+    private List<TeamPlayers> teamPlayers;
 }

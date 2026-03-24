@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl_PL">
+
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>Index</title>
+    </head>
+    <style>
+        span {
+            font-weight:normal;
+        }
+        h5 {
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        #div_created_by {
+            font-size: 12px;
+        }
+    </style>
+
+    <body>
+        <h1>Hello Sportradar!</h1>
+        <h2><u>This is an example usage with no UI</u></h2>
+        <br><br>
+        <h2>First, add two teams:</h2>
+        <br>
+        <h4>POST /save-team &#8594; to add new team</h4>
+        <h5>
+            <span>
+                <br>
+                <br>{
+                <br>&nbsp;&nbsp;&nbsp;"name": "Salzburg",
+                <br>&nbsp;&nbsp;&nbsp;"officialName": "Salzburg",
+                <br>&nbsp;&nbsp;&nbsp;"slug": "salzburg",
+                <br>&nbsp;&nbsp;&nbsp;"abbreviation": "RBS",
+                <br>&nbsp;&nbsp;&nbsp;"countryCode": "AUT",
+                <br>&nbsp;&nbsp;&nbsp;"stagePosition": null,
+                <br>&nbsp;&nbsp;&nbsp;"coach": "Daniel Beichler",
+                <br>&nbsp;&nbsp;&nbsp;"yearOfFoundation": "1933"
+                <br>}
+
+
+            </span>
+        </h5>
+
+        <h5>and</h5>
+
+        <h5>
+            <span>
+                <br>{
+                <br>&nbsp;&nbsp;&nbsp;"name": "Sturm",
+                <br>&nbsp;&nbsp;&nbsp;"officialName": "Sturm",
+                <br>&nbsp;&nbsp;&nbsp;"slug": "sturm",
+                <br>&nbsp;&nbsp;&nbsp;"abbreviation": "STU",
+                <br>&nbsp;&nbsp;&nbsp;"countryCode": "AUT",
+                <br>&nbsp;&nbsp;&nbsp;"stagePosition": null,
+                <br>&nbsp;&nbsp;&nbsp;"coach": "Fabio Ingolitsch",
+                <br>&nbsp;&nbsp;&nbsp;"yearOfFoundation": "1909"
+                <br>}
+
+
+            </span>
+        </h5>
+
+        <h2>Now, that you have teams, you can add a match:</h2>
+
+        <h4>POST /save-match &#8594; to add new match</h4>
+        <h5>
+            <span>
+                <br>{
+                <br>&nbsp;&nbsp;&nbsp;"match": {
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"discipline": "Football",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"season": "2019",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"status": "PLAYED",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dateVenue": "18.07.2019",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dayOfWeek": "THURSDAY",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"timeVenueUTC": "18:30",
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stadium": null,
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"groupCol": null
+                <br>&nbsp;&nbsp;&nbsp;},
+                <br>&nbsp;&nbsp;&nbsp;"homeTeamName": "Salzburg",
+                <br>&nbsp;&nbsp;&nbsp;"awayTeamName": "Sturm"
+                <br>}
+
+
+            </span>
+        </h5>
+
+
+        <h2>Now, that you have teams and match, you can retrieve them with the following endpoints:</h2>
+
+        <h4>GET /find-all-matches &#8594; to get all matches</h4>
+        <h4>GET /find-one-match/{id} &#8594; to get single match by its id</h4>
+
+        <h2>We can also retrieve teams:</h2>
+
+        <h4>GET /find-all-teams &#8594; to get all teams</h4>
+        <h4>GET /find-one-team/{name} &#8594; to get single team by its name</h4>
+
+        <br><br><br><br>
+
+        <div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
+    </body>
+</html>

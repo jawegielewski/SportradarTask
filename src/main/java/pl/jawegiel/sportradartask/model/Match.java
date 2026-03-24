@@ -1,5 +1,7 @@
 package pl.jawegiel.sportradartask.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.jawegiel.sportradartask.util.DayOfWeek;
@@ -14,6 +16,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "tbl_match")
 public class Match implements Serializable {
@@ -21,19 +24,20 @@ public class Match implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "match_id")
-    private long matchId;
+    private Long matchId;
 
     @Column(name = "discipline")
     private String discipline;
 
     @Column(name = "season")
-    private short season;
+    private Short season;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private MatchStatus status;
 
     @Column(name = "date_venue")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate dateVenue;
 
     @Enumerated(EnumType.STRING)
@@ -41,6 +45,7 @@ public class Match implements Serializable {
     private DayOfWeek dayOfWeek;
 
     @Column(name = "time_venue_utc")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime timeVenueUTC;
 
     @Column(name = "stadium")
@@ -51,9 +56,11 @@ public class Match implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "home_team_id_foreignkey", referencedColumnName = "team_id")
+    @JsonIgnoreProperties({"homeMatches", "awayMatches"}) // Ignore the back-links in Team
     private Team homeTeam;
 
     @ManyToOne
     @JoinColumn(name = "away_team_id_foreignkey", referencedColumnName = "team_id")
+    @JsonIgnoreProperties({"homeMatches", "awayMatches"}) // Ignore the back-links in Team
     private Team awayTeam;
 }
