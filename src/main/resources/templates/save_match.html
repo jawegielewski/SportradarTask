@@ -2,53 +2,87 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <title>Main : Save Match</title>
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <style>
+    p.error {
+        margin: 0;
+        padding: 0;
+        display: block; /* Keeps it on a new line, but without the gap */
+        color: red;
+    }
     #div_created_by {
         font-size: 12px;
     }
 </style>
 <body>
-<h2><u>This is an example usage with UI</u></h2>
+<h2><u>User Friendly</u></h2>
 <br><br>
-
 <div>
     <h1>Match Management System</h1>
     <hr>
     <h2>Save Match</h2>
-
     <form action="#" th:action="@{/save-match}" th:object="${match_request}" method="POST">
-        <input type="text" th:field="*{match.discipline}" placeholder="Discipline">
+        <div>
+            <input type="text" th:field="*{match.discipline}" placeholder="Discipline">
+            <p th:if="${#fields.hasErrors('match.discipline')}" th:errorclass="error" th:errors="*{match.discipline}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.season}" placeholder="Season">
+        <div>
+            <input type="text" th:field="*{match.season}" placeholder="Season">
+            <p th:if="${#fields.hasErrors('match.season')}" th:errorclass="error" th:errors="*{match.season}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.dateVenue}" placeholder="Date venue">
+        <div>
+            Status (any of: SCHEDULED, PLAYED, CANCELED
+            <br>
+            <input type="text" th:field="*{match.status}" placeholder="Status">
+            <p th:if="${#fields.hasErrors('match.status')}" th:errorclass="error" th:errors="*{match.status}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.dayOfWeek}" placeholder="Day of week">
+        <div>
+            Date venue (must be of format: dd.MM.yyyy)
+            <br>
+            <input type="text" th:field="*{match.dateVenue}" placeholder="Date venue">
+            <p th:if="${#fields.hasErrors('match.dateVenue')}" th:errorclass="error" th:errors="*{match.dateVenue}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.timeVenueUTC}" placeholder="Time venue">
+        <div>
+            Day of week (any of: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY)
+            <br>
+            <input type="text" th:field="*{match.dayOfWeek}" placeholder="Day of week">
+            <p th:if="${#fields.hasErrors('match.dayOfWeek')}" th:errorclass="error" th:errors="*{match.dayOfWeek}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.stadium}" placeholder="Stadium">
+        <div>
+            Time vanue (must be of format: HH:mm)
+            <br>
+            <input type="text" th:field="*{match.timeVenueUTC}" placeholder="Time venue">
+            <p th:if="${#fields.hasErrors('match.timeVenueUTC')}" th:errorclass="error" th:errors="*{match.timeVenueUTC}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{match.groupCol}" placeholder="Group col">
+        <div>
+            <input type="text" th:field="*{match.stadium}" placeholder="Stadium">
+            <p th:if="${#fields.hasErrors('match.stadium')}" th:errorclass="error" th:errors="*{match.stadium}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{homeTeamName}" placeholder="Home team name">
+        <div>
+            <input type="text" th:field="*{homeTeamName}" placeholder="Home team name">
+            <p th:if="${#fields.hasErrors('homeTeamName')}" th:errorclass="error" th:errors="*{homeTeamName}"></p>
+        </div>
         <br>
-        <input type="text" th:field="*{awayTeamName}" placeholder="Away team name">
+        <div>
+            <input type="text" th:field="*{awayTeamName}" placeholder="Away team name">
+            <p th:if="${#fields.hasErrors('awayTeamName')}" th:errorclass="error" th:errors="*{awayTeamName}"></p>
+        </div>
         <br><br>
         <button type="submit">Save match</button>
     </form>
-
     <hr>
-
     <a th:href="@{/}"> Back to index</a>
 </div>
-
-<br><br><br><br>
-
+<br><br><br>
 <div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
 </body>
 </html>

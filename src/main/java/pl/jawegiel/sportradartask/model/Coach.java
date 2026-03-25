@@ -6,14 +6,13 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString
+@ToString(exclude = "team")
 @Entity
 @Table(name = "tbl_coach")
 public class Coach implements Serializable {

@@ -5,13 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.jawegiel.sportradartask.dto.TeamRequest;
-import pl.jawegiel.sportradartask.model.Coach;
-import pl.jawegiel.sportradartask.model.Match;
 import pl.jawegiel.sportradartask.model.Team;
-import pl.jawegiel.sportradartask.repository.TeamRepository;
 import pl.jawegiel.sportradartask.service.CoachService;
 import pl.jawegiel.sportradartask.service.TeamService;
-import pl.jawegiel.sportradartask.util.VenueType;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +22,10 @@ public class TeamRestController {
 
     @PostMapping("/save-team-raw")
     public void saveTeam(@RequestBody TeamRequest teamRequest) {
+        coachService.processCoach(teamRequest.getTeam(), teamRequest.getCoachFirstName(), teamRequest.getCoachLastName());
 
-        log.info("Retrieving coach: {} {}", teamRequest.getCoachFirstName(), teamRequest.getCoachLastName());
-        processCoach(teamRequest.getTeam(), teamRequest.getCoachFirstName(), teamRequest.getCoachLastName());
-
-        if (isCoachFound(teamRequest.getTeam())) {
-            log.info("Adding team: {}", teamRequest.getTeam().toString());
+        if (coachService.isCoachFound(teamRequest.getTeam())) {
             teamService.save(teamRequest.getTeam());
-            log.info("Team successfully added");
         }
     }
 
@@ -55,20 +47,6 @@ public class TeamRestController {
         } else {
             log.info("Match with given name: {} does not exist.", name);
             return null;
-        }
-    }
-
-    private boolean isCoachFound(Team team) {
-        return team.getCoach() != null;
-    }
-
-    private void processCoach(Team team, String coachFirstName, String coachLastName) {
-        Optional<Coach> optionalCoach = coachService.findByFirstNameAndLastNAme(coachFirstName, coachLastName);
-        if (optionalCoach.isEmpty()) {
-            log.info("Coach named: {} {} not found", coachFirstName, coachLastName);
-        } else {
-            log.info("Coach named: {} {} successfully retrieved", coachFirstName, coachLastName);
-            team.setCoach(optionalCoach.get());
         }
     }
 }

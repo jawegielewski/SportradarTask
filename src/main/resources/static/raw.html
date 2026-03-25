@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <title>Index</title>
@@ -16,16 +15,9 @@
             font-size: 12px;
         }
     </style>
-
     <body>
-        <h2><u>This is an example usage without UI</u></h2>
+        <h2><u>Raw Mode</u></h2>
         <br><br>
-
-
-
-
-
-
         <h2>First, add two coaches:</h2>
         <br>
         <h4>POST /save-coach-raw &#8594; to add new coach</h4>
@@ -38,9 +30,7 @@
                 <br>}
             </span>
         </h5>
-
         <h5>and</h5>
-
         <h5>
             <span>
                 <br>{
@@ -49,14 +39,6 @@
                 <br>}
             </span>
         </h5>
-
-
-
-
-
-
-
-
         <h2>Then, add two teams:</h2>
         <br>
         <h4>POST /save-team-raw &#8594; to add new team</h4>
@@ -78,9 +60,7 @@
                 <br>}
             </span>
         </h5>
-
         <h5>and</h5>
-
         <h5>
             <span>
                 <br>{
@@ -98,9 +78,7 @@
                 <br>&nbsp;&nbsp;&nbsp;"coachLastName": "Ingolitsch"
             </span>
         </h5>
-
         <h2>Now, that you have teams, you can add a match:</h2>
-
         <h4>POST /save-match-raw &#8594; to add new match</h4>
         <h5>
             <span>
@@ -118,29 +96,18 @@
                 <br>&nbsp;&nbsp;&nbsp;"homeTeamName": "Salzburg",
                 <br>&nbsp;&nbsp;&nbsp;"awayTeamName": "Sturm"
                 <br>}
-
-
             </span>
         </h5>
-
-
         <h2>Now, that you have match, you can retrieve it with the following endpoints:</h2>
-
         <h4>GET /find-all-matches-raw &#8594; to get all matches</h4>
         <h4>GET /find-single-match-raw/{id} &#8594; to get single match by its id</h4>
-
         <h2>We can also retrieve teams:</h2>
-
         <h4>GET /find-all-teams-raw &#8594; to get all teams</h4>
         <h4>GET /find-single-team-raw/{name} &#8594; to get single team by its name</h4>
-
         <h2>And coaches:</h2>
-
         <h4>GET /find-all-coaches-raw &#8594; to get all coaches</h4>
         <h4>GET /find-single-coach-raw/{firstname}/{lastname} &#8594; to get single coach by its name</h4>
-
-        <br><br><br><br>
-
+        <br><br><br>
         <div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
     </body>
 </html>

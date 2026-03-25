@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
     <head>
         <title>Index : Main</title>
-
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     </head>
@@ -12,7 +11,7 @@
         }
     </style>
     <body>
-    <h2><u>This is an example usage with UI</u></h2>
+    <h2><u>User Friendly</u></h2>
     <br><br>
         <a href="../save-coach/false" class="btn btn-primary">Save coach</a>
         <br><br>
@@ -20,9 +19,11 @@
         <br><br>
         <a href="../save-match" class="btn btn-primary">Save match</a>
         <br><br>
-        <a href="../save-match" class="btn btn-primary">Get matches</a>
+        <a href="../find-all-matches" class="btn btn-primary">Find all matches</a>
         <br><br>
-        <a href="../save-match" class="btn btn-primary">Get match</a>
+        <a href="../find-single-match" class="btn btn-primary">Find single match</a>
+        <br><br>
+        <a th:href="@{/}"> Back to index</a>
         <br><br><br>
         <div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
     </body>

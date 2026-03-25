@@ -1,19 +1,18 @@
 package pl.jawegiel.sportradartask.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.jawegiel.sportradartask.dto.MatchRequest;
 import pl.jawegiel.sportradartask.model.Match;
-import pl.jawegiel.sportradartask.model.Team;
 import pl.jawegiel.sportradartask.service.MatchService;
-import pl.jawegiel.sportradartask.service.TeamService;
-import pl.jawegiel.sportradartask.util.VenueType;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,7 +21,6 @@ import java.util.Optional;
 public class MatchController {
 
     private final MatchService matchService;
-    private final TeamService teamService;
 
     @GetMapping("/save-match")
     public String saveMatch(Model model) {
@@ -32,38 +30,48 @@ public class MatchController {
     }
 
     @PostMapping("/save-match")
-    public String saveMatch(@ModelAttribute("match_request") MatchRequest matchRequest) {
-//        matchService.save(match);
-
-        log.info("Retrieving home team: {}", matchRequest.getHomeTeamName());
-        processTeam(matchRequest.getMatch(), matchRequest.getHomeTeamName(), VenueType.HOME);
-
-        log.info("Retrieving away team: {}", matchRequest.getAwayTeamName());
-        processTeam(matchRequest.getMatch(), matchRequest.getAwayTeamName(), VenueType.AWAY);
-
-        if (areTeamsFound(matchRequest.getMatch())) {
-            log.info("Adding match: {}", matchRequest.getMatch().toString());
-            matchService.save(matchRequest.getMatch());
-            log.info("Match successfully added");
+    public String saveMatch(@Valid @ModelAttribute("match_request") MatchRequest matchRequest, BindingResult result) {
+        if (result.hasErrors()) {
+            return "save_match";
         }
 
-        return "main";
+        matchService.save(matchRequest);
+
+        return "redirect:/main";
     }
 
-    private boolean areTeamsFound(Match match) {
-        return match.getHomeTeam() != null && match.getAwayTeam() != null;
+    @GetMapping("/find-all-matches")
+    public String findAllMatches(Model model) {
+        List<Match> matches = matchService.findAll();
+        model.addAttribute("matches", matches);
+        return "find_all_matches";
     }
 
-    private void processTeam(Match match, String teamName, VenueType venueType) {
-        Optional<Team> optionalTeam = teamService.findByOfficialName(teamName);
-        if (optionalTeam.isEmpty()) {
-            log.info("Team named: {} not found", teamName);
+    @GetMapping("/find-single-match")
+    public String findSingleMatch(Model model) {
+        long matchId = -1;
+        model.addAttribute("matchId", matchId);
+        return "find_single_match";
+    }
+
+    @PostMapping("/find-single-match")
+    public String findSingleMatch(@RequestParam("matchId") long matchId, RedirectAttributes redirectAttributes) {
+        if (matchId <= 0) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Match ID must be a positive number");
+            return "redirect:/find-single-match";
+        }
+        Optional<Match> optionalMatch = matchService.findById(matchId);
+        if (optionalMatch.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Match with such id does not exist.");
+            return "redirect:/find-single-match";
         } else {
-            log.info("Team named: {} successfully retrieved", teamName);
-            switch (venueType) {
-                case HOME -> match.setHomeTeam(optionalTeam.get());
-                case AWAY -> match.setAwayTeam(optionalTeam.get());
-            }
+            redirectAttributes.addFlashAttribute("match", optionalMatch.get());
+            return "redirect:/find-single-match/" + matchId;
         }
+    }
+
+    @GetMapping("/find-single-match/{matchId}")
+    public String findSingleMatch(Model model, @PathVariable long matchId) {
+        return "find_single_match";
     }
 }

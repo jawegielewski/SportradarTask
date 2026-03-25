@@ -9,5 +9,4 @@ class SportradarTaskApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

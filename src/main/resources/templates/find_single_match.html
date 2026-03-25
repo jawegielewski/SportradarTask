@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Main : Find Match</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+    }
+    #div_created_by {
+        font-size: 12px;
+    }
+</style>
+<body>
+<h2><u>User Friendly</u></h2>
+<br><br>
+<div>
+    <h1>Match Management System</h1>
+    <hr>
+    <h2>Get Single Match</h2>
+    <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+    <form action="#" th:action="@{/find-single-match}" method="POST">
+        <div>
+            <input type="number" name="matchId" placeholder="Match id" required>
+        </div>
+        <br><br>
+        <button type="submit">Search match</button>
+    </form>
+    <div th:if="${matchId>-1 && match != null}">
+        <table>
+            <thead>
+            <tr>
+                <th>Discipline</th>
+                <th>Season</th>
+                <th>Status</th>
+                <th>Date venue</th>
+                <th>Day of week</th>
+                <th>Time venue</th>
+                <th>Stadium</th>
+                <th>Group col</th>
+                <th>Home team name</th>
+                <th>Away team name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${match.discipline}"/>
+                <td th:text="${match.season}"/>
+                <td th:text="${match.status}"/>
+                <td th:text="${match.dateVenue}"/>
+                <td th:text="${match.dayOfWeek}"/>
+                <td th:text="${match.timeVenueUTC}"/>
+                <td th:text="${match.stadium}"/>
+                <td th:text="${match.groupCol}"/>
+                <td th:text="${match.homeTeam.officialName}"/>
+                <td th:text="${match.awayTeam.officialName}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <a th:href="@{/}"> Back to index</a>
+</div>
+<br><br><br>
+<div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
+</body>
+</html>

@@ -2,22 +2,18 @@ package pl.jawegiel.sportradartask.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import pl.jawegiel.sportradartask.dto.MatchRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.jawegiel.sportradartask.model.Coach;
 import pl.jawegiel.sportradartask.service.CoachService;
 
-import java.util.List;
-import java.util.Optional;
-
 @Controller
 @AllArgsConstructor
-@Slf4j
 public class CoachController {
 
     private final CoachService coachService;
@@ -32,14 +28,12 @@ public class CoachController {
 
     @PostMapping("/save-coach")
     public String saveCoach(@Valid @ModelAttribute("coach") Coach coach, BindingResult result) {
-
         if (result.hasErrors()) {
             return "save_coach";
         }
 
-        log.info("Adding coach: {}", coach.toString());
         coachService.save(coach);
-        log.info("Coach successfully added");
-        return "main";
+
+        return "redirect:/main";
     }
 }
