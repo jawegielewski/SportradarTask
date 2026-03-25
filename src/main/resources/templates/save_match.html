@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Main : Save Match</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    #div_created_by {
+        font-size: 12px;
+    }
+</style>
+<body>
+<h2><u>This is an example usage with UI</u></h2>
+<br><br>
+
+<div>
+    <h1>Match Management System</h1>
+    <hr>
+    <h2>Save Match</h2>
+
+    <form action="#" th:action="@{/save-match}" th:object="${match_request}" method="POST">
+        <input type="text" th:field="*{match.discipline}" placeholder="Discipline">
+        <br>
+        <input type="text" th:field="*{match.season}" placeholder="Season">
+        <br>
+        <input type="text" th:field="*{match.dateVenue}" placeholder="Date venue">
+        <br>
+        <input type="text" th:field="*{match.dayOfWeek}" placeholder="Day of week">
+        <br>
+        <input type="text" th:field="*{match.timeVenueUTC}" placeholder="Time venue">
+        <br>
+        <input type="text" th:field="*{match.stadium}" placeholder="Stadium">
+        <br>
+        <input type="text" th:field="*{match.groupCol}" placeholder="Group col">
+        <br>
+        <input type="text" th:field="*{homeTeamName}" placeholder="Home team name">
+        <br>
+        <input type="text" th:field="*{awayTeamName}" placeholder="Away team name">
+        <br><br>
+        <button type="submit">Save match</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to index</a>
+</div>
+
+<br><br><br><br>
+
+<div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
+</body>
+</html>

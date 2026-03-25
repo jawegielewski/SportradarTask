@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Main : Save Team</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    p.error {
+        margin: 0;
+        padding: 0;
+        display: block; /* Keeps it on a new line, but without the gap */
+        color: red;
+    }
+    #div_created_by {
+        font-size: 12px;
+    }
+</style>
+<body>
+<h2><u>This is an example usage with UI</u></h2>
+<br><br>
+
+<div>
+    <h1>Team Management System</h1>
+    <hr>
+    <h2>Save Team</h2>
+
+    <form action="#" th:action="@{/save-team}" th:object="${team_request}" method="POST">
+        <div>
+            <input type="text" th:field="*{team.name}" placeholder="Name">
+            <p th:if="${#fields.hasErrors('team.name')}" th:errorclass="error" th:errors="*{team.name}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.officialName}" placeholder="Official name">
+            <p th:if="${#fields.hasErrors('team.officialName')}" th:errorclass="error" th:errors="*{team.officialName}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.slug}" placeholder="Slug">
+            <p th:if="${#fields.hasErrors('team.slug')}" th:errorclass="error" th:errors="*{team.slug}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.abbreviation}" placeholder="Abbreviation">
+            <p th:if="${#fields.hasErrors('team.abbreviation')}" th:errorclass="error" th:errors="*{team.abbreviation}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.countryCode}" placeholder="Country code">
+            <p th:if="${#fields.hasErrors('team.countryCode')}" th:errorclass="error" th:errors="*{team.countryCode}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.stagePosition}" placeholder="Stage position">
+            <p th:if="${#fields.hasErrors('team.stagePosition')}" th:errorclass="error" th:errors="*{team.stagePosition}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{coachFirstName}" placeholder="Coach first name">
+            <p th:if="${#fields.hasErrors('coachFirstName')}" th:errorclass="error" th:errors="*{coachFirstName}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{coachLastName}" placeholder="Coach last name">
+            <p th:if="${#fields.hasErrors('coachLastName')}" th:errorclass="error" th:errors="*{coachLastName}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{team.yearOfFoundation}" placeholder="Year of foundation">
+            <p th:if="${#fields.hasErrors('team.yearOfFoundation')}" th:errorclass="error" th:errors="*{team.yearOfFoundation}"></p>
+        </div>
+        <br><br>
+        <button type="submit">Save team</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to index</a>
+</div>
+
+<br><br><br><br>
+
+<div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
+</body>
+</html>

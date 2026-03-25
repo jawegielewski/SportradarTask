@@ -1,24 +1,23 @@
 package pl.jawegiel.sportradartask.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.net.URI;
 
 @Controller
 public class HelloController {
 
-    @GetMapping
-    ResponseEntity<Void> redirect() {
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("/raw"))
-                .build();
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/main")
+    public String mainUserFriendly() {
+        return "main";
     }
 
     @GetMapping("/raw")
-    public String index() {
+    public String raw() {
         return "raw";
     }
 }

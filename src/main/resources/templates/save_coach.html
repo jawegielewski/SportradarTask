@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Main : Save Team</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+    #redirected_info {
+        color: orange;
+    }
+    p.error {
+        margin: 0;
+        padding: 0;
+        display: block; /* Keeps it on a new line, but without the gap */
+        color: red;
+    }
+    #div_created_by {
+        font-size: 12px;
+    }
+</style>
+<body>
+<h2><u>This is an example usage with UI</u></h2>
+<br>
+
+<div th:if="${isRedirected}">
+    <h3 id="redirected_info">You need to add coach first</h3>
+</div>
+
+<br>
+<div>
+    <h1>Coach Management System</h1>
+    <hr>
+
+    <h2>Save Coach</h2>
+
+    <form action="#" th:action="@{/save-coach}" th:object="${coach}" method="POST">
+        <div>
+            <input type="text" th:field="*{firstName}" placeholder="First name">
+            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
+        </div>
+        <div>
+            <input type="text" th:field="*{lastName}" placeholder="Last name">
+            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
+        </div>
+        <br><br>
+        <button type="submit">Save coach</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to index</a>
+</div>
+
+<br><br><br><br>
+
+<div id="div_created_by">~~~~~~ Webapp created by <b>Jakub Wegielewski</b></div>
+</body>
+</html>
